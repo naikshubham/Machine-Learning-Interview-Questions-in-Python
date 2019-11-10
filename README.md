@@ -38,11 +38,20 @@ df.isna().sum()        | find the number of missing values
 df['feature'].mean()   | returns the mean
 .fillna(0)             | fills missing values with the arguments passed to it
 
+### Data distributions and transformations
+- It can happen that the way we split the dataset before we send it into a machine learning model can cause the train & test sets to have different distributions which introduces bias into the Machine Learning Framework.
 
+#### Train/Test split
 
+```python
+X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.3)
+```
 
+`sns.pairplot()` --> plot matrix of distributions and scatterplots
 
-
+### Data transformation
+- Box-Cox Transformations (power transformation)
+`scipy.stats.boxcox(data, lmbda=)`
 
 
 
