@@ -95,6 +95,9 @@ z = x - min(x) / max(x) - min(x)
 
 #### Preprocessing steps : `Missing --> Transforms --> outliers --> Scaling`
 
+### Handling Outliers
+- Visualizing data using boxplot is one way to visualize outliers. Another way for handling outliers is by calculating the Z-score which gives a threshold for outliers approximately +/- 3 standard deviations away from the mean.
+
 
 
 
