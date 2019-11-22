@@ -98,6 +98,76 @@ z = x - min(x) / max(x) - min(x)
 ### Handling Outliers
 - Visualizing data using boxplot is one way to visualize outliers. Another way for handling outliers is by calculating the Z-score which gives a threshold for outliers approximately +/- 3 standard deviations away from the mean.
 
+## Regression : feature selection
+- Selecting the correct features reduces overfitting by removing unwanted features that contributes noise but not information.
+- Improves accuracy since any misleading data is removed
+- Since model is less complex it is more interpretable
+- Less data means the ML algorithm takes less time to train
+
+### Feature selection methods
+- **Filter** : Rank features based on statistical performance between the independent variable and the target variable
+- **Wrapper** : Uses an ML model to evaluate performance
+- **Embedded** : Iterative model training to extract features
+- **Feature importance** : Offered by few of the tree-based ML models in scikit-learn
+
+### Compare and contrast methods
+- **Filter methods** are the only techniques that do not use any ML model, but rather **correlation**, this means that the best subset may not always be selected but prevents overfitting. However, the model based methods have the advantage of selecting the best subset, however depending on the parameter this can lead to overfitting.
+
+Method            | Use an ML model | Select best subset | Can overfit |
+:---------------: |:---------------:|:------------------:|:-----------:|
+Filter            | No              | No                 | No          |
+Wrapper           | Yes             | Yes                | Sometimes   |
+Embedded          | Yes             | Yes                | Yes         |
+Feature Importance| Yes             | Yes                | Yes         |
+
+### Correlation coefficient statistical tests (Filter method) 
+- The statistical tests for filter methods depends on the datatype of feature and response.This gives a **numerical relationship** between all the features so that a threshold can be applied as a filter, thus the name **filter method**
+
+Feature/Response | Continuous            | Categorical |
+:---------------:|:---------------------:|:-----------:|
+Continuous       | Pearson's Correlation | LDA         |
+Categorical      | ANOVA                 | Chi-Square  |
+
+### Filter functions
+
+**Function**            | **returns**                  |
+:----------------------:|:----------------------------:|
+df.corr()               | Pearson's correlation matrix |
+sns.heatmap(corr_object)| heatmap plot                 |
+abs()                   | absolute value               |
+
+- We also use `abs()` function to return the threshold value since correlation could be negative or positive
+
+
+### Wrapper methods
+1) **Forward selection (LARS - least angle regression)** : Sequentially adds features one at a time based on thier model contribution. **`Starts with no features, adds one at a time`**
+
+2) **Backward elimination** : Starts with all the features, and sequentially drops features based on the least contribution in a given step.
+
+3) **Forward selection/backward elimination combination(bidirectional elimination)** 
+
+4) **Recursive feature elimination (RFECV)**
+
+### Embedded methods
+- Includes **Lasso Regression**, **Ridge Regression** and **ElasticNet(hybrid of lasso & ridge)** 
+- They perform an iterative process which extracts the features that contributes the most during a given iteration to return best subset dependent on the penalty parameter **alpha**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
