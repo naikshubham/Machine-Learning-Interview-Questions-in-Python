@@ -152,6 +152,46 @@ abs()                   | absolute value               |
 - Includes **Lasso Regression**, **Ridge Regression** and **ElasticNet(hybrid of lasso & ridge)** 
 - They perform an iterative process which extracts the features that contributes the most during a given iteration to return best subset dependent on the penalty parameter **alpha**
 
+### Tree-based feature importance methods
+- **Random forest** --> `sklearn.ensemble.RandomForestRegressor`
+- **Extra Trees** --> `skleanr.ensemble.ExtraTreesRegressor`
+- **After model fit** -> `tree_mod.feature_importances_`
+
+
+Function                             | returns                                     |
+:-----------------------------------:|:-------------------------------------------:|
+sklearn.svm.SVR                      | support vector regression estimator         |
+sklearn.feature_selection.RFECV      | recursive feature elimination with cross-val|
+rfe_mod.support_                     | boolean array of selected features          |
+rfe_mod.ranking_                     | feature ranking, selected = 1               |
+sklearn.linear_model.LinearRegression| linear model estimator                      |
+skleanr.linear_model.LarsCV          | least angle regression with cross-val       |
+LarsCV.score                         | r-squared score                             |
+LarsCV.alpha_                        | estimated regularization parameter          |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
