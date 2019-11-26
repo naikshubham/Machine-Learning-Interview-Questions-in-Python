@@ -234,6 +234,69 @@ mod_cv.alpha_
 alphas=np.logspace(-6, 6, 13)
 ```
 
+### Classification : Feature Engineering
+- Extracts additional information from the data
+- Creates additional relevant features
+- One of the most effective ways to improve predictive models
+
+### Benefits of feature engineering
+- Increased predictive power of the learning algorithm
+- Makes your machine learning models perform even better!
+
+### Types of feature enginnering
+- **Indicator variables**
+- **Interaction features**
+- **Feature representation**
+
+### `Indicator varaibles`
+- **Threshold indicator** : Example of a Threshold indicator is when we use a **feature such as age** to distinguish whether a value is above or below a given threshold like high school Vs college
+- **Multiple features** : can be used as a flag to indicate properties if we have the domain knowledge, that the combination is considered premium
+- **Special events** : such as Black Friday or Christmas
+- **Groups of classes** : can be used to create a paid flag for website traffic sources such as Google adwords or Facebook ads
+
+### `Interaction features`
+- **Are created by using two or more features** and then taking thier sum, difference, product, quotient, other mathematical combos. Since combined features may predict better then separately
+
+### `Feature Representation`
+- Take Datetime stamps and extract the day of week or hour of day
+- Grouping categorical levels into small number of observations as a single level called 'Other'
+- Transformation of categorical variables to dummy varaibles commonly called **one hot encoding** 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
