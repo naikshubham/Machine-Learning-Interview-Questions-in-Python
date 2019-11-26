@@ -170,6 +170,72 @@ LarsCV.score                         | r-squared score                          
 LarsCV.alpha_                        | estimated regularization parameter          |
 
 
+### Regression : Regularization algorithms
+- **Ridge, Lasso, ElasticNet regressions are forms of regularizations**, simple techniques designed to reduce model complexity and help prevent overfitting. They do so by adding a penalty term to Ordinary Least Squares or OLS formula.
+- **Ordinary least squares** : sum(yi - (yi)^)^2 : Minimizes the sum of the square residuals
+- **Ridge loss function ** : sum(yi - (yi)^)^2 + lambda sum(beta^2) (Ridge penalty term)
+With Ridge the penalty term is added by multiplying penalty parameter lambda times the squared coefficent values(Beta). This shrinks the value of the coefficents towards zero, but not zero which is called L2 regularization or L2 norm
+
+- ** Lasso loss function** : sum(yi - (yi)^)^2 + lambda sum(abs(beta)) (Lasso penalty term) Also called L1 regularization or L1 norm is similar to ridge except that it takes the absolute value of the coefficents instead of squares, this results in shrinking less important feature coefficents to zero and results in a type of feature selection 
+
+### Ridge Vs Lasso
+|Regularization     |            L1(Lasso)                  |       L2(Ridge)               |
+|:-----------------:|:-------------------------------------:|:-----------------------------:|
+|penalizes          |sum of absolute values of coefficients |sum of squares of coefficients |
+|solutions          |sparse                                 | non-sparse                    |
+|number of solutions| multiple                              | one                           | 
+|feature selection  | yes                                   | no                            |
+|robust to outliers?| yes                                   | no                            |
+|complex patterns?  | no                                    | yes                           |
+
+### ElasticNet 
+- Hybrid of Ridge and Lasso, using an L1 ratio. ElasticNet combines the two penalization methods with penalty as L2 when the L1 ratio is zero and L1 when its 1. This allows flexible regularization anywhere between lasso and ridge. lambda is a shared penalization parameter while alpha sets the ratio between L1 & L2 regularization parameter. Alpha is set automatically.
+
+### Regularization with Boston housing data
+- Predicts house prices given several features
+
+|        Features                 |CHAS | NOX |RM  |
+:--------------------------------:|:---:|:---:|:--:|
+|Coefficient estimates            |2.7  |-17.8|3.8 |
+|Regularized coefficient estimates|0    | 0   |0.95|
+- Removing this unimportant features results in less noise and higher accuracy
+
+### Regularization functions
+
+```python
+# Lasso estimator
+sklearn.linear_model.Lasso
+
+# Lasso estimator with cross-validation
+sklearn.linear_model.LassoCV
+
+# Ridge estimator
+sklearn.linear_model.Ridge
+
+# Ridge estimator with cross-validation
+sklearn.linear_model.RidgeCV
+
+#ElasticNet estimator
+sklearn.linear_model.ElasticNet
+
+#ElasticNet estimator with cross-validation 
+sklearn.linear_model.ElasticNetCV
+
+# Train-test split
+sklearn.model_selection.train_test_split
+
+# Mean squared error
+sklearn.metrics.mean_squared_error(y_test, predict(X_test))
+
+# Best regularization parameter
+mod_cv.alpha_
+
+# array of log values
+alphas=np.logspace(-6, 6, 13)
+```
+
+
+
 
 
 
