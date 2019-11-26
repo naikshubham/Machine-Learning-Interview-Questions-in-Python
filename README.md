@@ -174,9 +174,9 @@ LarsCV.alpha_                        | estimated regularization parameter       
 - **Ridge, Lasso, ElasticNet regressions are forms of regularizations**, simple techniques designed to reduce model complexity and help prevent overfitting. They do so by adding a penalty term to Ordinary Least Squares or OLS formula.
 - **Ordinary least squares** : sum(yi - (yi)^)^2 : Minimizes the sum of the square residuals
 - **Ridge loss function ** : sum(yi - (yi)^)^2 + lambda sum(beta^2) (Ridge penalty term)
-With Ridge the penalty term is added by multiplying penalty parameter lambda times the squared coefficent values(Beta). This shrinks the value of the coefficents towards zero, but not zero which is called L2 regularization or L2 norm
+With Ridge the penalty term is added by multiplying penalty parameter lambda times the squared coefficient values(Beta). This shrinks the value of the coefficients towards zero, but not zero which is called L2 regularization or L2 norm
 
-- ** Lasso loss function** : sum(yi - (yi)^)^2 + lambda sum(abs(beta)) (Lasso penalty term) Also called L1 regularization or L1 norm is similar to ridge except that it takes the absolute value of the coefficents instead of squares, this results in shrinking less important feature coefficents to zero and results in a type of feature selection 
+- ** Lasso loss function** : sum(yi - (yi)^)^2 + lambda sum(abs(beta)) (Lasso penalty term) Also called L1 regularization or L1 norm is similar to ridge except that it takes the absolute value of the coefficients instead of squares, this results in shrinking less important feature coefficients to zero and results in a type of feature selection 
 
 ### Ridge Vs Lasso
 |Regularization     |            L1(Lasso)                  |       L2(Ridge)               |
