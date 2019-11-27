@@ -262,7 +262,38 @@ alphas=np.logspace(-6, 6, 13)
 - Grouping categorical levels into small number of observations as a single level called 'Other'
 - Transformation of categorical variables to dummy varaibles commonly called **one hot encoding** 
 
+### Different categorical levels
+- We need to take care of the classes that exists in training data but not in test data.
+- Training data: model trained with [red, blue, green]
+- Test data : model test with [red, green, yellow], additional color not seen in training.
+- We can tackle this using **robust one-hot encoding**
 
+### Engineer feature using Debt to income ratio
+- Using original features Monthly Debt and Annual Income/12
+
+### Feature engineering fucntions
+| Function                                              | returns                  |
+|:-----------------------------------------------------:|:------------------------:|
+| sklearn.linear_model.LogisticRegression               | logistic regression      |
+| sklearn.model_selection.train_test_split              |train/test split function |
+| sns.countplot(x='Loan status', data=data)             |bar plot                  |
+| df.drop(['Feature 1', 'Feature 2'], axis=1)           |drops list of features    |
+| df['Loan Status'].replace({'Paid':0,'Not Paid':1})    |Loan status               |
+| pd.get_dummies()                                      |k-1 binary features       |
+| sklearn.metrics.accuracy_score(y_test,predict(X_test))|model accuracy            |
+
+   
+### Ensemble methods
+- Ensemble learning techniques : **Bootstrap Aggregation (a.k.a Bagging), Boosting, Model Stacking**
+- A **linear model**, no matter how it is fit to the data it is unable to capture the true curved relationship
+- **Bias** is the inability for the Machine Learning Method to capture the true realtionship
+- Making the assumption that data has a linear relationship when it's actually more complex results in **high bias** , **underfitting the model** and **poor model generalization**
+- **Bias decreases** when the model complexity increases, since the model tends towards accurate representation of the complex structure in the data. 
+- **Complex models fits the train points, but fails to fit the test points**
+- **Variance** : Algorithms in High complexity models tends to model random noise in training data creating a large difference in fits between training and test datasets. As more complex structures are identified, sensitivity towards small changes in data also increases leading to **high variance, overfitting and poor model generalization**
+
+### Bias-Variance Trade-Off
+- In Machine Learning the best algorithm has a **low bias** which can accurately model the true relationship, but also has **low variance** meaning it can provide consistent predictions with different datasets. This is the sweet spot we seek to find in ML achieving the lowest bias and lowest variance.
 
 
 
