@@ -295,6 +295,104 @@ alphas=np.logspace(-6, 6, 13)
 ### Bias-Variance Trade-Off
 - In Machine Learning the best algorithm has a **low bias** which can accurately model the true relationship, but also has **low variance** meaning it can provide consistent predictions with different datasets. This is the sweet spot we seek to find in ML achieving the lowest bias and lowest variance.
 
+### Bagging (Bootstrap aggregation)
+- Uses Bootstrap sampling. Bootstrapping is an sampling techinque where the subset of the data is selected with replacement, meaning the same row of data maybe chosen more than once in a given subset.
+- **Model** is built for each bootstrap sample and output predictions are averaged which reduces variance and produces an more accurate model.
+
+### Boosting
+- Boosting also builds multiple sequential models but does so in a sequential order. Learning to reduce predictive errors from previous models by modifying the original dataset with weights for incorrectly predicted instances.
+- Results in a model with decreased bias.
+
+### Model stacking
+- Takes the predictions from individual models and combines them to create an higher accuracy models.
+- Model stacking uses predictions of base classifiers as inputs for training to a second level model. 
+
+### Vecstack Package
+- Vecstack package contains an convenient function called `stacking`, which takes the list of **instantiated models, X_train, Y_train and X_test**, it then outputs a set of objects that can conveniently be used in a second level modelling
+
+```python
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from xgboost import XGBClassifier
+from vecstack import stacking
+
+# create list : stacked_models
+stacked_models = [BaggingClassifier(n_estimators=25, random_state=123), AdaBoostClassifier(n_estimators=25, random_state=123)]
+
+# stack the models : stack_train, stack_test
+stack_train, stack_test = stacking(stacked_models, X_train, y_train, X_test, regression=False, mode = 'oof_pred_bag', needs_proba=False, metric=accuracy_score, n_folds=4, stratified=True, shuffle=True, random_state=8, verbose=2)
+
+# initialize and fit 2nd level model
+final_model = XGBClassifier(random_state=123, n_jobs=-1, learning_rate=0.1, n_estimators=10, max_depth=3)
+final_model_fit = final_model.fit(stack_train, y_train)
+
+# predict : stacked_pred
+stacked_pred = final_model.predict(stack_test)
+
+# final prediction score
+print("Final prediction score: [%.8f]' % accuracy_score(y_test, stacked_pred))
+```
+
+### Ensemble functions
+|Algorithm             | Function                             |
+|:--------------------:|:------------------------------------:|
+|Bootstrap aggregation | sklearn.ensemble.BaggingClassifier() |
+|Boosting              | sklearn.ensemble.AdaBoostClassifier()|
+|XGBoost               | xgboost.XGBClassifier()              | 
+
+### Bagging Vs boosting
+|Technique        | Bias    | Variance |
+:----------------:|:-------:|:--------:|
+| Bagging         |Increase | Decrease |
+| Boosting        |Decrease | Increase |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
