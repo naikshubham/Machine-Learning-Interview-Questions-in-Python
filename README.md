@@ -347,6 +347,20 @@ print("Final prediction score: [%.8f]' % accuracy_score(y_test, stacked_pred))
 | Boosting        |Decrease | Increase |
 
 
+### Unsupervised learning methods
+Unsupervised learning is used to find the patterns in the data using Principal Component Analysis(PCA) and Singular Value decomposition(SVD).**Dimensionality Reduction != Feature selection** . Dimensionalty reduction techniques creates new combination of features. Feature selection includes or excludes features based on its relationship to the target variable, but there is no feature transformation happening as there is with dimensionality reduction.
+
+### Curse of dimensionality
+We start with as many features as possible which is the best practice, however there is a phenomenon which happens where the **model performance decreases as the number of features increase**. This is so called curse of dimensionality. In a high dimensionality context the feature space becomes more sparse leading to **overfitting**.
+
+### Dimension reduction function
+
+| Function/method                      |   returns                               |
+:-------------------------------------:|:---------------------------------------:|
+|sklearn.decomposition.PCA             |principal component analysis             |
+|sklearn.decomposition.TruncatedSVD    |singular value decomposition             |
+|PCA/SVD.fit_transform(X)              |fits and transforms data                 |
+|PCA/SVD.explained_variance_ratio_     |variance explained by Principal component|
 
 
 
