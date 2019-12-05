@@ -362,6 +362,46 @@ We start with as many features as possible which is the best practice, however t
 |PCA/SVD.fit_transform(X)              |fits and transforms data                 |
 |PCA/SVD.explained_variance_ratio_     |variance explained by Principal component|
 
+### Dimensionality Reduction : Visualization techniques
+- **Speeds up ML training** : Less dimension means algorithms can simply run faster
+- **Visualization** : Helps us to visualize the data, since visualizing more than 3 dimensions are troublesome
+- **Improves accuracy** : It improves the accuracy of our trained models bcz it removes unimportant and colinear information resulting in less noise and redundancy which results in more acurately trained models.
+
+### Visualizing with PCA (Mathematical technique)
+- **First principal component** is a linear combination of original features **which captures the maximum variance** in the dataset and **determines the direction of highest variability** 
+- **Second Principal component** is also a linear combination of original features capturing remaining variance in the dataset and is **uncorrelated with the first PC**
+- Using the **`explained_variance_ratio_`** method we printed the variance. This variance ratio when plotted creates what is called as a **Scree plot**. This helps to visually determine how many PC it takes to describe the maximal amount of variance or information contained in the dataset. It can be used to obtain the **optimal number of PC** to take forward for modelling.
+
+### Visualizing with t-SNE (Probabilistic technique)
+- It takes pairs of data points in high dimensional space and computes a probability that they are related and chooses a low dimensional embedding to produce a similar distribution. These embeddings then can be visualized.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
