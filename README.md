@@ -375,6 +375,104 @@ We start with as many features as possible which is the best practice, however t
 ### Visualizing with t-SNE (Probabilistic technique)
 - It takes pairs of data points in high dimensional space and computes a probability that they are related and chooses a low dimensional embedding to produce a similar distribution. These embeddings then can be visualized.
 
+### Clustering algorithms
+Common practical applications of clustering are Customer Segmentation, Document Classification, Detection of anamolies like (Insurance/transcation fraud detection), Image segmentation, Anomaly detection etc.
+
+#### K-means
+- **1)** Choosing the initial centroids or choosing the location of the cluster.
+- **2)** Then each observation is assigned to its nearest centroid
+- **3)** Followed by taking the mean of all the obsevations assigned to a given centroid to create new centroids
+- **4)** Steps 2 and 3 are iterated until the centroids significantly move.
+
+#### Hierarchical agglomerative clustering
+- Involves successivley merging or splitting observations. The hierarchy is represented as a tree known as a **dendrogram**.
+- Agglomerative clustering uses an bottom up approach where each observation starts in its own cluster becoming merged into groups of clusters based on a given linkage criteria. Using **dendogram** to select the number of clusters depends on both the linkage criteria and the distance threshold.
+
+### Selecting a clustering algorithm
+- There is no best way to select clustering algorithm, however one way is to assess cluster stability which can be done by **comparing algorithms that share some similarity**. E.g K-means and HC both use Euclidian distance and are therefore comparable.
+- Intra-cluster distances:mean of the distance between points of a cluster and cluster centroid & Inter cluster distances can be computed as a mean of the distances between cluster centroids. **In any well formed cluster the intra cluster distances should be less than the inter cluster distances** 
+- When comparing different clustering algorithms, you must make sure they are comparable by assessing the same distance metric between them, not different distance metrics.
+
+#### Clustering functions 
+
+|Functions                                 |returns                                                                 |
+:-----------------------------------------:|:----------------------------------------------------------------------:|
+|sklearn.cluster.Kmeans                    |K-Means clustering algo                                                 |
+|sklearn.cluster.AgglomerativeClustering   |Agglomerative clustering algo                                           |
+|kmeans.inertia_                           |SS distances of observations to closest cluster center                  |
+|scipy.cluster.hierarchy as sch            |Hierarchical clustering for dendograms                                  |
+|sch.dendrogram()                           |Dendogram function                                                      |
+|KMeans.inertia_                           |**Sum of squared distances of samples to their closest cluster center** |
+
+### Choosing the optimal number of clusters particularly for K-Means
+- Two most used methods are **Silhouette method** & **Elbow method**
+
+#### Silhouette method
+- **Silhouette method** : uses the **silhouette coefficient** which is composed of two scores, **1)** The mean distance between the observation and all of the other observations **in the same cluster** and **2)** the mean distance betwn the observation and all other observations **in the next nearest cluster**
+- The silhouette coefficient values are between -1 and 1, with **1 denoting the observation is very near others in the same cluster and very far from others in the other clusters** 
+- **-1** is the worst score and the observation is not near others in the same cluster and close to others in the other cluster and may have actually been assigned to the wrong cluster.
+- Score of **0** indicates that there is a overlap among the clusters. The observation is on or close to boundary between two clusters.
+- There is a convinient function from sklearn.metrics called silhouette_score which called on a data matrix and labels of a trained k-means model returns the mean silhouette coefficient of all observations as one simple to interpret score 
+
+#### Elbow method
+- Is a visualizing technique and the resulting plot looks like an arm, then the elbow on the arm looks like the optimal k. It uses the sum of the squared distances from each observation to its nearest cluster center or centroid similar to **inertia** attribute from a trained k-means model.The sum of squares decreases as the values for k increases.
+
+### Optimal K selection functions
+| Function                        | returns                                                          |
+:--------------------------------:|:-----------------------------------------------------------------:
+|sklearn.cluster.KMeans           |K-Means clustering algorithm                                      |
+|sklearn.metrics.silhouette_score |score between -1 and 1 as measure of cluster stability            |
+|kmeans.inertia_                  |sum of squared distances of observations to closet cluster center |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
