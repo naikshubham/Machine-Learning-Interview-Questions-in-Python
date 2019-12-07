@@ -425,6 +425,276 @@ Common practical applications of clustering are Customer Segmentation, Document 
 |kmeans.inertia_                  |sum of squared distances of observations to closet cluster center |
 
 
+### Model generalization : bootstraping and cross-validation
+- **Model generalization** : A ML model's ability to perform well on unseen data test dataset and future data. Similar evaluation metric between train and test set are the symbol of model generalizabilty.
+
+#### Decision Trees
+- **Bootstrapping** is one of the methods that helps with model generalization. Decision trees is a supervised learning algorithm used to build predictive machine learning models for both categorical and continous target variables.
+
+<p align="center">
+  <img src="/data/DT.JPG" width="350" title="Decision Tree">
+</p>
+
+- The top of the DT is called the root node, where we see a split was made with X3<=0.8. The criteria used to make that split is **Gini index**. It is the measure of impurity. **Samples** corresponds to the number of observations in the dataset.The **value** is the number of observations in each class.
+- The observations that are evaluated True are split to the left, the remainder going to the right. And it continues until the decision is made making splits and directing observations.
+- If this was **regression tree** instead the split criteria would you use the lowest mean square error to make splits rather than gini.
+- **Advantages** : Easy to understand and visualize.
+- **Disadvantages** : Easily overfit, they are considered greedy(they may not return globally optimal trees) and they are biased in cases of class imblance.
+
+#### Random Forest
+- Bootstraped version of many Decision Trees. Bootstrapping is the sampling technique where subset of the data is selected with replacement, averaging the output predictions to reduce variance resulting in more accurate model.
+
+### K-fold cross validation
+- K-fold CV is another technique we can use to help model generalize, since its prevents model overfitting. The way it works is training data is split into k-folds . 1-fold is held out and used as a test set, while the remaining folds are used for model training, this continues in an iterative manner until all of the folds have been used as the testing set.
+
+#### Functions
+
+```python
+#decision tree
+sklearn.tree.DecisionTreeClassifier
+
+#random forest
+sklearn.ensemble.RandomForestClassifier
+
+#cross-validated grid search
+sklearn.model_selection.GridSearchCV
+
+#model accuracy
+sklearn.metrics.accuracy_score
+
+#train test splits
+sklearn.model_selection.train_test_split
+
+#parameter that gave best results
+cross-val_model.best_params_
+
+# Mean cross-validated score of estimator with best params
+cross-val_model.best_score_
+```
+
+### GridSearchCV vs RandomSearchCV
+- GridSearchCV function test parameters for a given spacing inorder to give paramter estimates. Since this doesn't search entire space its good to be aware of the RandomSearchCV function as its more likely to come up with the optimal paramter estimation. A randomsearch space tends to have a longer runtime.
+
+### Model evaluation : imbalanced classification models
+- **Class imbalance** : Imbalance class problem implies that the ML model has an categorical target variable.Most ML algo works best when there are approx equal number of observations in the classes
+- When there is a large difference in the number of observations in each class it can cause misleading results
+- Confusion matrix shows the number of correctly and incorrectly classified observations in each class.
+- **When evaluating the model with imbalance classes accuracy in not the best metrics to use**. A closer look at **confusion matrix** can be insightful and used to calculate better metric in the case of imbalanced classes.
+
+- **Precision** : TP/(FP+TP) measures how often the model is correct, when it predicts the positive class. Low precision indicates a high number of false positives.
+- A low precision score indicates that there are too many false positives, bringing the calculation down. Seeking to reduce the number of false positives to increase the precision can be accomplished with trying different classification algorithms and/or resampling techniques.
+- **Recall/Sensitivity** : is a measure of how often a positive is predicted when an observation is positive (TP/(TP+FN)). Low recall indicates a high number of false negatives.
+- **F1 score** : weighted average of precision and recall also called the harmonic mean of precision and recall. 2*(precision * recall)/(precision * recall)
+
+- Resampling is a technique which tries to create balance between classes. Either oversample minority class or undersample majority class. Always split into train and test before trying oversampling techniques.
+- Oversampling before spliting the data can allow the exact same observations to be present into train and test set and lead to overfitting and poor generalization.
+
+#### Functions
+
+```python
+sklearn.linear_model.LogisticRegression            #returns Logistic Regression 
+sklearn.metrics.confusion_matrix(y_test, y_pred)   #returns confusion matrix
+sklearn.metrics.precision_score(y_test, y_pred)    #returns precision
+sklearn.metrics.recall_score(y_test, y_pred)       #returns recall
+sklearn.metrics.f1_score(y_test, y_pred)           #returns f1 score 
+sklearn.utils.resample(deny,n_samples=len(approve))#returns resamples
+```
+
+### Model Selection : Regression models
+- **Multicollinearity** : Multicollinearity is when independent variables are highly correlated. 
+- One of the outputs of the regression models are the estimated regression coefficients. These coefficients are interpreted as the amount of change of the Dependent variables that can be explained by Independent variable while holding all other variables constant in a multiple regression framework.
+- But when independent variables are correlated all of the sudden interpreting the amount of explained variance gets less clear, threatning the results of the linear regression analysis.
+
+### Effects of multicollinearity
+- Multicollinearity can affect ML models by reducing coefficients and p-values causing variance to be unpredictable.
+- Overfitting
+- Increased standard error which lowers statistical significance further leading to failing to reject which is a type two error for hypothesis testing.
+- True relationship with target variable becomes unclear
+
+### Techniques to address multicollinearity
+- We need to identify if multicollinearity exists in our data and do something about it.
+- First thing we need to do is create a correlation matrix. Plot a heatmap of correlations to get better visual understanding
+- Calculate the variance inflation factor (VIF)
+- We can introduce penalizations (Ridge ,Lasso)
+- We can do PCA,since it can remove multicollinearity
+
+#### Variance inflation factor
+- VIF is another way to determine whether or not features are collinear(correlated) with each other. Higher to correlation, higher the VIF value.Values between 1 to 5 can be safely ignored.
+
+| VIF value | Multicollinearity |
+|:---------:|:-----------------:|
+|<=1        | no                |
+|>1         |yes, but can ignore|
+|>5         |yes,need to address|
+
+### Functions
+
+| Functions                             | returns                    |
+|:-------------------------------------:|:--------------------------:|
+|sklearn.linear_model.LinearRegression  | Linear Regression          |
+|data.corr()                            |correlation matrix          |
+|sns.heatmap(corr)                      |heatmap of correlations     |
+|mod.coef_                              |estimated model coefficients|
+|mean_squared_error(y_test,y_pred)      |MSE                         |
+|r2_score(y_test, y_pred)               |R-squared score             |
+|df.columns                             |column names                |
+
+#### Addressing multicollinearity
+
+After careful exploratory data analysis, you realize that your baseline regression model suffers from multicollinearity. How would you check if that is true or not? Without losing any information, can you build a better baseline model?
+- Create a correlation matrix and/or heatmap, then engineer features to combine multicollinear independent variables, making sure to remove the individual features used to create any new features.
+- Create a correlation matrix and/or heatmap, then perform Ridge regression to penalize multicollinear independent variables and perform feature selection for modeling.
+- Create a correlation matrix and/or heatmap, then perform PCA to combine multicollinear independent variables as new principal components.
+
+### Model Selection : Ensemble models
+- How to choose among different ensemble models
+- Random forest, Gradient Boosting
+
+
+#### RF  Vs GB (defaults)
+
+|parameter    | Random Forest   | GradientBoosting |
+|:-----------:|:---------------:|:----------------:|
+|n_estimators |10               |100               |
+|criterion    |gini(or entropy) |friedman_mse      |
+|max_depth    |None             | 3                |
+|learning_rate|N/A              |0.1               |
+
+- **n_estimators** : For RF indicates the number of trees the algo should build. For GB this is the number of boosting staging to perform
+- **criterion** : tells the algo on what basis to split on
+- **max_depth** : For RF defaults to None which allows the nodes to expand until all leaves are pure. For GB this is the max depth of individual regression estimators, max_depth limits the nodes in the tree and default is 3
+- **learning_rate** : In GB LR shrinks the contribution of each tree by this value. There is a tradeoff between learning_rate and n_estimators parameters. In RF its not applicable.
+
+#### While GB can use any algorithm, RF uses decision trees!
+
+#### Functions 
+
+|Functions                                  | Returns
+|:-----------------------------------------:|:----------------------:|
+|sklearn.ensemble.RandomForestClassifier    |Random Forest           |
+|sklearn.ensemble.GradientBoostingClassifier|Gradient Boosted Model  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
