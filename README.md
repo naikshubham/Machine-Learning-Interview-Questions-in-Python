@@ -142,11 +142,34 @@ abs()                   | absolute value               |
 ### Wrapper methods
 1) **Forward selection (LARS - least angle regression)** : Sequentially adds features one at a time based on thier model contribution. **`Starts with no features, adds one at a time`**
 
+SrNo|Steps
+:--:|:---------------------------------------:
+i)  | Start with an empty feature set
+ii) |Try each feature one by one
+iii)| Estimate the accuracy i.e estimate the classification or regression error on adding each feature
+iv) |Select feature that gives maximum improvement
+
 2) **Backward elimination** : Starts with all the features, and sequentially drops features based on the least contribution in a given step.
+
+sr no. | steps
+:-----:|:--------------------:
+i)     | Start with the whole feature set
+ii)    |Try removing features
+iii)   |Find that feature whose removal gives rise to maximum improvement in the performance, and drop that feature
+
 
 3) **Forward selection/backward elimination combination(bidirectional elimination)** 
 
-4) **Recursive feature elimination (RFECV)**
+4) **Recursive feature elimination (RFECV)** : A variant of multivariate feature selection
+
+Sr no | steps
+:----:|:---------------:
+i)    |Compute weights on all the features
+ii)   |Remove features with smallest weights
+iii)  |Recompute weights on reduced data
+iv)   |If stopping criteria not met repeat step2
+
+5) **Univariate analysis** : Looks at each feature independently. We can build a model using individual feature and based on the model evaluation metric such as accuracy we can determine whether the feature is useful in predicting targets or not.
 
 ### Embedded methods
 - Includes **Lasso Regression**, **Ridge Regression** and **ElasticNet(hybrid of lasso & ridge)** 
